@@ -43,9 +43,9 @@ public class MinimumJumps {
 		int maxReach = arr[0];
 		int steps = arr[0];
 		for (int i = 1; i < n; i++) {
-			if (i == n - 1)
+			if (i == n - 1) {
 				return jumps;
-
+			}
 			maxReach = Math.max(maxReach, i + arr[i]);
 			steps--;
 
