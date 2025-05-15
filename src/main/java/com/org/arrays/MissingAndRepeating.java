@@ -19,38 +19,37 @@ public class MissingAndRepeating {
         twoElement.forEach(System.out::println);
 
         System.out.println("======V2+++++++++++++");
-        ArrayList<Long> twoElement1 = findTwoElementV2(arr);
+        ArrayList<Integer> twoElement1 = findTwoElementV2(arr);
         twoElement1.forEach(System.out::println);
 
     }
 
-    private static ArrayList<Long> findTwoElementV2(int[] arr) {
-
-        //calculate n number sum using math formula
+    static ArrayList<Integer> findTwoElementV2(int arr[]) {
         int n = arr.length;
         long A = (long) n * (n + 1) / 2;
-        long A2 = (long) n * (n + 1) * (2L * n + 1) / 6;
+        // SAFELY compute A2 = n(n+1)(2n+1)/6
+        long A2 = (long) n;
+        A2 = A2 * (n + 1);     // n(n+1)
+        A2 = A2 * (2L * n + 1); // n(n+1)(2n+1)
+        A2 = A2 / 6;           // Final division
 
-        long B = 0;
-        long B2 = 0;
+        long B = 0, B2 = 0;
         for (int num : arr) {
-            B += num;
+            B += (long) num;
             B2 += (long) num * num;
         }
 
-        long ABDiff = B - A;
-        long AB2Diff = B2 - A2;
-        //b2-a2=(b-a)*(b+a)
-        //ABDiff*(X+Y)=AB2Diff
-        //B+A=AB2Diff/ABDiff
-        long sum = AB2Diff / ABDiff;
-        long repeating = (ABDiff + sum) / 2;
-        long missing = sum - repeating;
+        long diff = B - A;            // b - a
+        long squareDiff = B2 - A2;    // b^2 - a^2
+        long sum = squareDiff / diff; // b + a
 
-        System.out.println("Repeating number: " + repeating);
-        System.out.println("Missing number: " + missing);
+        long repeating = (sum + diff) / 2;
+        long missing = repeating - diff;
 
-        return new ArrayList<>(Arrays.asList(repeating, missing));
+        ArrayList<Integer> res = new ArrayList<>();
+        res.add((int) repeating);
+        res.add((int) missing);
+        return res;
     }
 
     public static ArrayList<Integer> findTwoElement(int[] arr) {
