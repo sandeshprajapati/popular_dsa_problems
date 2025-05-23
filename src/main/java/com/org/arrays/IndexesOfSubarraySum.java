@@ -2,6 +2,7 @@ package com.org.arrays;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 public class IndexesOfSubarraySum {
@@ -50,7 +51,7 @@ public class IndexesOfSubarraySum {
 			}
 
 		}
-		return new ArrayList<>(Arrays.asList(-1));
+		return new ArrayList<>(Collections.singletonList(-1));
 
 	}
 
